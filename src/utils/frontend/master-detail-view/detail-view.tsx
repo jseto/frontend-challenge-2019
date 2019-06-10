@@ -28,17 +28,21 @@ export class DetailView<T> extends Component< DetailViewProps<T>, DetailViewStat
 			<div className="detail-view">
 				<div className="detail-icon-panel">
 					<div className="move-arrows">
-						<span className={ "arrow-icon-text" + ( haveToShowUp( item )? '' : ' hide' ) }>
+						<span
+							className={ "arrow-icon-text up-button" + ( haveToShowUp( item )? '' : ' hide' ) }
+							onClick={ () => onMoveUp( item )}
+						>
 							<AngleUp data-icon="angle-up" fill="gray" width="1em" height="1.4em"
 								className="svg-inline icon-button"
-								onClick={ () => onMoveUp( item )}
 							/>
 							Up
 						</span>
-						<span className={ "arrow-icon-text" + ( haveToShowDown( item )? '' : ' hide' ) }>
+						<span
+							className={ "arrow-icon-text down-button" + ( haveToShowDown( item )? '' : ' hide' ) }
+							onClick={ () => onMoveDown( item )}
+						>
 							<AngleDown data-icon="angle-down" fill="gray" width="1em" height="1.4em"
 								className="svg-inline icon-button"
-								onClick={ () => onMoveDown( item )}
 							/>
 							Down
 						</span>

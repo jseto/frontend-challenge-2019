@@ -4,7 +4,7 @@ import { DetailView } from "./detail-view";
 export interface ViewListItem<T> {
 	key: string;
 	label: string;
-	object: T;
+	object?: T;
 }
 
 export interface MasterViewState {
@@ -34,7 +34,7 @@ export class MasterView< T > extends Component< MasterViewProps<T>, MasterViewSt
 	}
 
 	render() {
-		let { listSource, onDelete } = this.props;
+		let { listSource } = this.props;
 
 		return (
 			<ul className="master-view">
@@ -44,7 +44,7 @@ export class MasterView< T > extends Component< MasterViewProps<T>, MasterViewSt
 							item={ item }
 							queryActivate={ () => this.detailViewClicked( item.key ) }
 							active={ this.state.active[ item.key ] }
-							onDelete={ ()=>onDelete( item ) }
+							onDelete={ ()=>this.delete( item ) }
 							onMoveUp={ ()=>this.moveUp( item ) }
 							onMoveDown={ ()=>this.moveDown( item ) }
 							haveToShowUp={ () => this.haveToShowUpArrow( item ) }
@@ -57,13 +57,20 @@ export class MasterView< T > extends Component< MasterViewProps<T>, MasterViewSt
 		);
 	}
 
+	private delete( item: ViewListItem<T> ) {
+		this.props.onDelete( item );
+		this.setState({})
+	}
+
 	private moveUp( item: ViewListItem<T> ) {
 		const replacedItem = this.props.onMoveUp( item );
+		this.setState({})
 		this.scrollBy = -this.base.children.namedItem( replacedItem.key ).scrollHeight;
 	}
 
 	private moveDown( item: ViewListItem<T> ) {
 		const replacedItem = this.props.onMoveDown( item );
+		this.setState({})
 		this.scrollBy = this.base.children.namedItem( replacedItem.key ).scrollHeight;
 	}
 
