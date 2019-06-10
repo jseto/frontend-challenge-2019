@@ -25,7 +25,7 @@ export class DetailView<T> extends Component< DetailViewProps<T>, DetailViewStat
 		let { item, children, onMoveDown, onMoveUp, onDelete, haveToShowUp, haveToShowDown } = this.props;
 
 		return (
-			<div>
+			<div className="detail-view">
 				<div className="detail-icon-panel">
 					<div className="move-arrows">
 						<span className={ "arrow-icon-text" + ( haveToShowUp( item )? '' : ' hide' ) }>

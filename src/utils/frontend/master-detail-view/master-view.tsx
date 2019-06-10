@@ -37,7 +37,7 @@ export class MasterView< T > extends Component< MasterViewProps<T>, MasterViewSt
 		let { listSource, onDelete } = this.props;
 
 		return (
-			<ul>
+			<ul className="master-view">
 				{ listSource.map( item => { return (
 					<li id={item.key} key={item.key}>
 						<DetailView

@@ -2,6 +2,10 @@ import { City } from "./city";
 import { List } from "../utils/list";
 
 export class WorldWeatherController {
+	constructor() {
+		this._selectedCitiesList = new List<City>();
+	}
+
 	get selectableCities(): City[] {
 		return []
 	}
