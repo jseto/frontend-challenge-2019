@@ -1,5 +1,5 @@
 import { h, ComponentChildren, Component } from "preact";
-import { ViewListItem } from "../item-picker";
+import { ViewListItem } from "./master-view";
 let TrashBin = require( "@fortawesome/fontawesome-free/svgs/regular/trash-alt.svg" );
 let AngleUp = require( "@fortawesome/fontawesome-free/svgs/solid/angle-up.svg" );
 let AngleDown = require( "@fortawesome/fontawesome-free/svgs/solid/angle-down.svg" );

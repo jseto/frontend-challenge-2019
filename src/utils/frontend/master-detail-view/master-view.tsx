@@ -1,7 +1,11 @@
 import { h, ComponentProps, Component } from "preact";
-import preact = require("preact");
 import { DetailView } from "./detail-view";
-import { ViewListItem } from "../item-picker";
+
+export interface ViewListItem<T> {
+	key: string;
+	label: string;
+	object: T;
+}
 
 export interface MasterViewState {
 	active: {
