@@ -1,3 +1,8 @@
+export interface Location {
+	latitude: number;
+	longitude: number;
+}
+
 export class City {
 
 	setCode( code: string ) {
@@ -18,6 +23,26 @@ export class City {
 		return this._name;
 	}
 
+	setPlaceName( name: string ) {
+		this._placeName = name;
+		return this;
+	}
+
+	get placeName() {
+		return this._placeName;
+	}
+
+	setLocation( value: Location ) {
+		this._location = value;
+		return this;
+	}
+
+	get location() {
+		return this._location;
+	}
+
 	private _code: string;
 	private _name: string;
+	private _placeName: string;
+	private _location: Location;
 }

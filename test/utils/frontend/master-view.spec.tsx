@@ -5,7 +5,6 @@ import { ReactWrapper } from "../../../types/enzyme";
 
 describe( 'Master View Detail View', ()=>{
 	let wrapper: ReactWrapper;
-	// let testData: List<number>;
 	let testData: List<ViewListItem<number>>;
 	let deleteHdl: jest.Mock<ViewListItem<number>, [any]>;
 	const itemsToShow = ()=>wrapper.find('.items-to-show');

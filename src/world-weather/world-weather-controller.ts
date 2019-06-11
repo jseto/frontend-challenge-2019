@@ -1,13 +1,15 @@
 import { City } from "./city";
 import { List } from "../utils/list";
+import { PlacesAPI } from "../places-apis/places-api";
 
 export class WorldWeatherController {
-	constructor() {
+	constructor( placesAPI: PlacesAPI ) {
 		this._selectedCitiesList = new List<City>();
+		this._placesAPI = placesAPI;
 	}
 
-	get selectableCities(): City[] {
-		return []
+	findCity( partialName: string ): Promise<City[]> {
+		return this._placesAPI.getCities( partialName, 5 );
 	}
 
 	get selectedCities(): City[] {
@@ -27,4 +29,5 @@ export class WorldWeatherController {
 	}
 
 	private _selectedCitiesList: List<City>;
+	private _placesAPI: PlacesAPI;
 }

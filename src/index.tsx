@@ -3,8 +3,9 @@ import { WorldWeather } from "./world-weather/world-weather";
 import { WorldWeatherController } from "./world-weather/world-weather-controller";
 import { List } from "./utils/list";
 import { MasterView, ViewListItem } from "./utils/frontend/master-detail-view/master-view";
+import { Mapbox } from "./places-apis/mapbox";
 
-let controller = new WorldWeatherController();
+let controller = new WorldWeatherController( new Mapbox() );
 
 render(<WorldWeather controller={controller}/>, document.getElementsByTagName("WorldWeather").item(0));
 
