@@ -53,7 +53,10 @@ export class SearchBox<T> extends Component< SearchBoxProps<T>, SearchBoxState >
 
 	private itemClicked( item: ViewListItem<T> ) {
 		this.props.onSelect && this.props.onSelect( item );
-		this.setState({showItems: false});
+		this.setState({
+			showItems: false,
+			value: ''
+		});
 	}
 
   private valueChanged( value: string ) {

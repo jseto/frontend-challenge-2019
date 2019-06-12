@@ -56,6 +56,13 @@ describe( 'Data List', ()=>{
 		expect( wrapper.find('.search-box-panel') ).toHaveClassName( 'hide' );
 	})
 
+	it( 'should clear value on selected', ()=>{
+		wrapper.find('input').get(0).attributes['onInput']({ target: { value: 'a' } });
+		wrapper.find('li').at(0).simulate('click');
+
+		expect( wrapper ).toHaveState( 'value', '' );
+	})
+
 	it( 'should close panel on outside click', ()=>{
 		wrapper.find('input').get(0).attributes['onInput']({ target: { value: 'a' } });
 		map['click']({ target: document.body })
