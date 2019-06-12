@@ -3,7 +3,7 @@ import { ViewListItem } from "./master-detail-view/master-view";
 
 export interface SearchBoxProps<T> {
 	onSelect: ( item: ViewListItem<T> ) => void;
-	onInput: ( value: string ) => void;
+	onInput?: ( value: string ) => void;
 	items: ViewListItem<T>[];
 	value?: string;
 }

@@ -8,6 +8,12 @@ describe( 'World Weather Controller', ()=>{
 		controller = new WorldWeatherController( new MockPlacesAPI() );
 	})
 
+	describe( 'Managing city search', ()=>{
+		it( 'should store a list for cities searched with a patern', async ()=>{
+			const cities = await controller.findCity('ba');
+			expect( cities ).toEqual( controller.foundCities )
+		})
+	})
 
 	describe( 'Managing city in the list', ()=>{
 		it( 'should add city', async ()=>{
