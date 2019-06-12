@@ -31,4 +31,4 @@ export class Mapbox implements PlacesAPI {
 	}
 }
 
-PlacesAPI.registerAPI( 'mapbox', new Mapbox() );
+// PlacesAPI.registerAPI( 'mapbox', new Mapbox() );

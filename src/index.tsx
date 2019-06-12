@@ -1,9 +1,11 @@
+import "../scss/main.scss";
 import { h, render } from "preact";
 import { WorldWeather } from "./world-weather/world-weather";
 import { WorldWeatherController } from "./world-weather/world-weather-controller";
 import { List } from "./utils/list";
 import { MasterView, ViewListItem } from "./utils/frontend/master-detail-view/master-view";
 import { Mapbox } from "./places-apis/mapbox";
+import { SearchBox } from "./utils/frontend/search-box";
 
 let controller = new WorldWeatherController( new Mapbox() );
 
@@ -11,12 +13,20 @@ render(<WorldWeather controller={controller}/>, document.getElementsByTagName("W
 
 
 let testData = new List<ViewListItem<number>>([
-	{ key: 'a', label: 'a', object: 1 },
-	{ key: 'b', label: 'b', object: 2 },
-	{ key: 'c', label: 'c', object: 3 },
-	{ key: 'd', label: 'd', object: 4 },
-	{ key: 'e', label: 'e', object: 5 }
+	{ key: 'a', label: 'Aberdin', object: 1 },
+	{ key: 'b', label: 'Barcelona', object: 2 },
+	{ key: 'c', label: 'Cologne', object: 3 },
+	{ key: 'd', label: 'Dever', object: 4 },
+	{ key: 'e', label: 'Edinburg', object: 5 }
 ])
+
+render(
+	<SearchBox
+		items={ testData.items }
+		onSelect={item => console.log('selected ', item.label)}
+	>
+	</SearchBox>
+, document.getElementsByTagName("SearchBox").item(0));
 
 render(
 	<MasterView

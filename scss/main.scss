@@ -1,0 +1,447 @@
+.world-weather {
+	@extend %font;
+}
+
+.world-weather button {
+	@extend %button-base;
+}
+
+.world-weather button:disabled {
+	color: lightgray;
+	cursor: inherit;
+}
+
+.world-weather ul {
+	list-style-type: none;
+	margin-block-start: 0;
+	margin-block-end: 0;
+	padding-inline-start: 0;
+}
+
+.world-weather p {
+	margin: 0.5em;
+}
+
+.world-weather h3 {
+	margin: 0.5em;
+}
+
+.world-weather .input-big input {
+	font-size: 1.3em !important;
+	font-weight: bold;
+	width: 100%;
+}
+
+%border-bottom {
+	border: none;
+	border-bottom: 1px solid;
+	// margin-bottom: 0.5em;
+}
+
+.world-weather .border-bottom {
+	@extend %border-bottom;
+}
+
+.world-weather input {
+	@extend %font;
+	@extend %panel-border;
+	outline: none;
+	color: #3137ba;
+	background-color: transparent;
+	margin-bottom: 0.5em;
+	width: 90%;
+}
+
+.world-weather .stay-length input {
+	// width: 1.4em;
+	width: 2.5em;
+}
+
+.world-weather ::placeholder{
+	color: #3137ba40;
+}
+
+.world-weather .svg-inline {
+    display: inline-block;
+    font-size: inherit;
+    overflow: visible;
+    vertical-align: middle;
+		margin-right: 0.3em;
+		height: 100%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% {  transform: rotate(359deg); }
+}
+
+.world-weather .spin {
+  animation: spin 2s linear infinite;
+}
+
+.world-weather .hide {
+	display: none;
+}
+
+.world-weather .clickable {
+  cursor: pointer;
+}
+
+.world-weather .danger {
+	color: red;
+}
+
+%font {
+	font-family: sans-serif;
+	font-size: 10pt;
+}
+
+%panel-border {
+	// border-radius: 6px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: lightgrey;
+	box-shadow: 3px 3px 6px #d9d9d9ef;
+}
+
+.world-weather .icon-button {
+	cursor: pointer;
+}
+
+.world-weather .icon-button:hover {
+	transform: scale(1.3);
+}
+
+.world-weather .icon-button:active {
+  transform: scale(1);
+}
+
+%inline {
+	display: inline-block;
+	line-height: normal;
+}
+
+.world-weather .inline {
+	@extend %inline;
+	vertical-align: top;
+}
+
+.world-weather .inline-middle {
+	@extend %inline;
+	vertical-align: middle;
+}
+
+.world-weather .inline-bottom {
+	@extend %inline;
+	vertical-align: bottom;
+}
+
+.world-weather .full-width {
+	width: 100%;
+}
+
+.world-weather .half-width {
+	width: 50%;
+}
+
+.world-weather .one-third-width {
+	width: 33%;
+}
+
+.world-weather .align-right {
+	text-align: right;
+	// float: right;
+}
+
+.world-weather .align-center {
+	text-align: center;
+}
+
+.world-weather .align-left {
+	text-align: left;
+}
+
+.world-weather .dim-color {
+	color: gray;
+}
+
+.world-weather .bottom-margin {
+	margin-bottom: 1em;
+}
+
+.world-weather .vertical-margin {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.world-weather .vertical-margin-half {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.world-weather .padding-top-half {
+	padding-top: 0.5em;
+}
+
+.world-weather .input-error {
+	color: red;
+	margin: 0 0.5em 1em 0.5em;
+	font-size: 0.8em;
+}
+
+.world-weather .input-error a:link {
+	color: #910000;
+}
+
+.world-weather .input-error a:visited {
+	color: #910000;
+}
+
+//------------------------------------------------------------
+// Button related classes
+//------------------------------------------------------------
+
+%button-base {
+	@extend %font;
+	background-color: rgba(255, 255, 255, 0.75);
+	border-style: solid;
+  border-width: 1px;
+	border-radius: 15px;
+  color: gray;
+	padding: 0.3em 0.7em;
+  outline: none;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.world-weather .button {
+	@extend %button-base;
+}
+
+.world-weather .wish-widget {
+	@extend %button-base;
+	text-align: center;
+  display: inline-block;
+}
+
+//------------------------------------------------------------
+// ItemPicker
+//------------------------------------------------------------
+.world-weather .item-picker .add-button {
+	margin: 0 0 0.5em 0.5em;
+}
+
+//------------------------------------------------------------
+// PickerPanel
+//------------------------------------------------------------
+
+// .world-weather .picker-master-view {
+// 	background-color: lightgray;
+// }
+
+.world-weather .picker-panel {
+	// list-style-type: none;
+	margin-left: 1em;
+	margin-top: 0;
+	position: absolute;
+	color: gray;
+	border-width: 1px;
+	max-height: 10em;
+	overflow: auto;
+	background-color: white;
+	padding: 0.8em;
+	width: 60%;
+	z-index: 1;
+	@extend %panel-border;
+}
+
+.world-weather .picker-panel li {
+	margin: 0.5em;
+}
+
+.world-weather .picker-panel li:hover {
+	background-color: #f1f1f1
+}
+
+//------------------------------------------------------------
+// Trip planner
+//------------------------------------------------------------
+
+.world-weather .trip-panel {
+	// padding: 0.5em;
+ 	background-color: #00000005;
+	@extend %panel-border;
+	// background-color: white;
+	// margin: 1em;
+	min-height: 10em;
+}
+
+.world-weather .trip-panel-heading {
+	padding: 1em;
+	padding-top: 0;
+}
+
+//------------------------------------------------------------
+// Detail Panel related classes
+//------------------------------------------------------------
+
+// .world-weather .master-view {
+// 	border-width: 1px;
+// 	border-style: solid;
+// 	border-color: lightgray;
+// }
+
+.world-weather .panel-content {
+	display: inherit;
+}
+
+.world-weather .detail-content {
+	border-width: 1px 0 1px 0;
+	border-style: solid;
+	border-color: lightgray;
+	text-align: left;
+}
+
+.world-weather .master-view .accordion-header {
+	padding: 0 0.5em 0.5em 0.5em;
+}
+
+// .world-weather .panel-container {
+// 	padding: 0 0.5em 0.5em 0.5em;
+// }
+
+.world-weather .detail-content .country-panel {
+	// background-color: #f9eded
+	background: linear-gradient(to bottom, #f9eded, #d7bebe);
+}
+
+.world-weather .detail-content .city-panel {
+	background-color: #ecf7f9
+}
+
+.world-weather .detail-content .activity-panel {
+	background-color: #f9f7ec
+}
+
+.world-weather .detail-view {
+	@extend %panel-border;
+	background-color: white;
+	margin: 0.6em;
+}
+
+.world-weather .detail-icon-panel {
+	width: 100%;
+	min-height: 1.3em;
+	// background-color: #efffec;
+	background: linear-gradient(to bottom, #efffec, #cdcdcd);
+}
+
+.world-weather .move-arrows {
+	display: inline-block;
+	margin-left: 0.4em;
+}
+
+.world-weather .trash-bin-icon {
+	float: right;
+}
+
+.world-weather .arrow-icon-text {
+	color: grey;
+	margin-right: 1em;
+}
+
+.world-weather .detail-left {
+	display: inline-block;
+	position: absolute;
+	width: 2em;
+	height: 100%;
+	align-content: center;
+}
+
+.world-weather .detail-right {
+	display: inline-block;
+	position: absolute;
+	right: 0.4em;
+	bottom: 0.3em;
+}
+
+//------------------------------------------------------------
+// Tooltip related classes
+//------------------------------------------------------------
+
+$tooltipBGColor: #dadada;
+
+/* Tooltip container */
+.world-weather .tooltip {
+  position: relative;
+}
+
+/* Tooltip text */
+.world-weather .tooltip .tooltiptext {
+  background-color: $tooltipBGColor;
+  border-radius: 4px;
+	margin: 1em;
+  position: absolute;
+  z-index: 5;
+	font-size: 0.8em;
+	padding: 1em;
+}
+
+.world-weather .popup .tooltiptext {
+	visibility: hidden;
+	color: black;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.world-weather .popup:hover .tooltiptext {
+  visibility: visible;
+}
+
+/*arrow*/
+.world-weather .bottom-tooltip::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%; /* At the bottom of the tooltip */
+  left: 1.5em;
+  border-width: 5px;
+  border-style: solid;
+	border-color: transparent transparent $tooltipBGColor transparent;;
+}
+
+.world-weather .top-tooltip::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 1.5em;
+  border-width: 5px;
+  border-style: solid;
+  border-color: $tooltipBGColor transparent transparent transparent;
+}
+
+.world-weather .tooltip .bottom-tooltip  {
+  top: 90%;
+  left: -1em;
+}
+
+.world-weather .tooltip .top-tooltip {
+  // width: auto;
+	// min-width: 8em;
+  bottom: 90%;
+  left: 0;
+  // margin-left: -5em; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+//------------------------------------------------------------
+// Tooltip related classes
+//------------------------------------------------------------
+
+
+// .world-weather .accordion-header {
+//   cursor: pointer;
+// }
+
+.world-weather .accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
