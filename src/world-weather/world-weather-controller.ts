@@ -11,11 +11,10 @@ export class WorldWeatherController {
 
 	async findCity( partialName: string ): Promise<City[]> {
 		return new Promise( resolve => this._placesAPI.getCities( partialName, 5 )
-		.then( cities => {
-			this._foundCities = [...cities];
-			this.notifyChange();
-console.log( cities )
-			resolve( cities );
+			.then( cities => {
+				this._foundCities = [...cities];
+				this.notifyChange();
+				resolve( cities );
 			})
 		)
 	}
