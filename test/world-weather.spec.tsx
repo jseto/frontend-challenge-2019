@@ -2,50 +2,72 @@ import { WorldWeather } from "../src/world-weather/world-weather";
 import { MockPlacesAPI } from "./mocks/mock-places-api";
 import { WorldWeatherController } from "../src/world-weather/world-weather-controller";
 import { ReactWrapper } from "../types/enzyme";
+import fetchMock = require("fetch-mock");
+import * as mockeWeatherData from "./mocks/mock-weather-data.json"
 
 describe('WorldWeather', ()=>{
 	let wrapper: ReactWrapper;
 	let controller: WorldWeatherController;
-	const dataList = () => wrapper.find('.data-list');
-	const dataListItems = () => dataList().find('options');
+	let mockFindCity: jasmine.Spy;
 
 	beforeEach(()=>{
+		fetchMock.mock( '*', () => mockeWeatherData )
 		controller = new WorldWeatherController( new MockPlacesAPI() );
+		mockFindCity = spyOn( controller, 'findCity' ).and.callThrough();
 		wrapper = mount(
 			<WorldWeather controller={ controller }/>
 		);
 	})
 
+	afterEach(fetchMock.reset);
+
 	describe( 'Challenge features', ()=>{
 
 		describe( 'Look for cities from suggestion', ()=>{
 
-			xit( 'should show a list of cities when partial name entered', ()=>{
-				dataList().find('input').get(0).attributes['onInput']({ target: { value: '2019-09-15' } })
+			it( 'should show a list of cities when partial name entered', async ()=>{
+				wrapper.find('.search-box input').get(0).attributes['onInput']({ target: { value: 'ba' } })
+				expect( mockFindCity ).toHaveBeenCalledWith('ba');
+				await controller.findCity('ba')
+				wrapper = wrapper.update();
 
-			 	expect( dataListItems().length ).toBe( 5 );
+				expect( controller.foundCities.length ).toBe( 5 );
+			 	expect( wrapper.find('.search-box-panel li').length ).toBe( 5 );
 			})
 		})
 
-		xit( 'should list all city which user selected with currently average temperature data', ()=>{
+		it( 'should list all city which user selected with currently average temperature data', async ()=>{
+			await controller.findCity('ba')
+			wrapper = wrapper.update();
+			wrapper.find( '.search-box-panel li' ).at(0).simulate('click');
+			await fetchMock.flush(true);
+			wrapper = wrapper.update();
 
+			expect( wrapper.find('.master-view li').at(0) ).toIncludeText( 'Bandung' );
+			expect( wrapper.find('.master-view li').at(0) ).toIncludeText( '17º' );
 		})
 
 		xit( 'should let config the temperature unit system e.g. Kelvin, Fahrenheit, Celsius', ()=>{
 
 		})
 
-		xit( 'should show datailed Weather info', ()=>{
-		// Average temperature.
-		// Min/Max temperature.
-		// Weather icon.
-		// Weather main e.g. Rain Snow, Sunny.
-		// Weather description.
-		// Wind speed.
-		// Humidity.
-		// Pressure.
-		// Rain volume.
-		// Showing 24 hours forecast.
+		it( 'should show datailed Weather info', async ()=>{
+			await controller.findCity('ba')
+			wrapper = wrapper.update();
+			wrapper.find( '.search-box-panel li' ).at(0).simulate('click');
+			await fetchMock.flush(true);
+			wrapper = wrapper.update();
+
+			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '17º' /*Average temperature*/ );
+			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( 'Min: 15ºC Max: 20ºC' /*Min/Max temperature*/ );
+			expect( wrapper.find('.city-view-detail img').get(0).attributes['src'] ).toContain( '04n' /*Weather icon*/ );
+			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( 'clouds' /*Weather main e.g. Rain Snow, Sunny*/ );
+			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( 'overcast clouds' /*Weather description*/ );
+			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '7.31 m/s' /*Wind speed*/ );
+			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '89%' /*Humidity*/ );
+			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '1013 hPa' /*Pressure*/ );
+			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '3 mm' /*Rain volume*/ );
+			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '--' /*Showing 24 hours forecast*/ );
 		})
 	})
 })

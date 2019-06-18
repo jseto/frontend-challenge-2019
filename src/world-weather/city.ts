@@ -1,7 +1,25 @@
-export interface Location {
+export interface Coordinates {
 	latitude: number;
 	longitude: number;
 }
+
+interface WeatherData {
+	temp: {
+		current: number;
+		min: number;
+		max: number;
+	};
+	icon: string;
+	weather: string;
+	description: string;
+	wind: number;
+	humidity: number;
+	pressure: number;
+	rain: number;
+	time: Date;
+}
+
+type Measure = 'speed' | 'temperature' | 'pressure' | 'length';
 
 export class City {
 
@@ -32,7 +50,7 @@ export class City {
 		return this._placeName;
 	}
 
-	setLocation( value: Location ) {
+	setLocation( value: Coordinates ) {
 		this._location = value;
 		return this;
 	}
@@ -41,8 +59,42 @@ export class City {
 		return this._location;
 	}
 
+	setWeatherData( data: WeatherData ) {
+		this._weatherData = {...data};
+		return this;
+	}
+
+	get weatherData() {
+		return this._weatherData;
+	}
+
+	setHourlyWeatherData( data: WeatherData[] ) {
+		this._hourlyWeatherData = [...data];
+		return this;
+	}
+
+	get hourlyWeatherData() {
+		return this._hourlyWeatherData;
+	}
+
+	localeTemp( temp?: number ) {
+		const t = temp? temp : this.weatherData.temp.current;
+		return Math.round( t - 272.15 );
+	}
+
+	getMeasureUnit( measure: Measure ) {
+		switch ( measure ) {
+			case 'speed': return 'm/s';
+			case 'temperature': return 'ºC';
+			case 'pressure': return 'hPa';
+			case 'length': return 'mm';
+		}
+	}
+
 	private _code: string;
 	private _name: string;
 	private _placeName: string;
-	private _location: Location;
+	private _location: Coordinates;
+	private _weatherData: WeatherData;
+	private _hourlyWeatherData: WeatherData[];
 }
