@@ -82,6 +82,7 @@ describe( 'World Weather Controller', ()=>{
 			await controller.addCity( cities[4] );
 
 			expect( controller.selectedCities[0].hourlyWeatherData[0].description ).toEqual( 'few clouds' );
+			expect( controller.selectedCities[0].hourlyWeatherData[0].time.toISOString() ).toEqual( '2019-03-27T19:00:00.000Z' );
 		})
 	})
 

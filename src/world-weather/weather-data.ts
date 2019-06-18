@@ -10,7 +10,7 @@ export class WeatherData {
 		const data: RespWeatherData = await resp.json();
 
 		return city.setWeatherData({
-			time: new Date(data.dt),
+			time: new Date(data.dt*1000),
 			temp: {
 				current: data.main.temp,
 				min: data.main.temp_min,
@@ -34,7 +34,7 @@ export class WeatherData {
 
 		return city.setHourlyWeatherData( data.list.map( (item: ListData) =>{
 			return {
-				time: new Date( item.dt ),
+				time: new Date( item.dt * 1000 ),
 				temp: {
 					current: item.main.temp,
 					min: item.main.temp_min,
