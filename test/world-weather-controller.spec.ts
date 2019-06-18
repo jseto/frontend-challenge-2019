@@ -6,9 +6,12 @@ import * as mockeWeatherData from "./mocks/mock-weather-data.json"
 describe( 'World Weather Controller', ()=>{
 	let controller: WorldWeatherController;
 	let mockOnChange: jest.Mock<any, any>;
+	const weatherURL = 'begin:https://api.openweathermap.org/data/2.5/weather';
+	const forecastURL = 'begin:https://api.openweathermap.org/data/2.5/forecast'
 
 	beforeEach(()=>{
-		fetchMock.mock('*',() => mockeWeatherData );
+		fetchMock.mock( weatherURL, mockeWeatherData.weather );
+		fetchMock.mock( forecastURL, mockeWeatherData.forecast );
 		mockOnChange = jest.fn();
 		controller = new WorldWeatherController( new MockPlacesAPI() );
 		controller.setOnChange( mockOnChange )
@@ -63,6 +66,22 @@ describe( 'World Weather Controller', ()=>{
 			controller.moveCity( cities[3], 1 )
 			expect( controller.selectedCities[4] ).toBe( cities[3] );
 			expect( mockOnChange ).toHaveBeenCalledTimes( 1 );
+		})
+	})
+
+	describe( 'Retrieving data', ()=>{
+		it( 'should insert weather data', async ()=>{
+			const cities = await controller.findCity('ba');
+			await controller.addCity( cities[4] );
+
+			expect( controller.selectedCities[0].weatherData.description ).toEqual( 'overcast clouds' );
+		})
+
+		it( 'should insert hourly weather data', async ()=>{
+			const cities = await controller.findCity('ba');
+			await controller.addCity( cities[4] );
+
+			expect( controller.selectedCities[0].hourlyWeatherData[0].description ).toEqual( 'few clouds' );
 		})
 	})
 

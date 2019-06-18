@@ -1,6 +1,7 @@
 import { City } from "./city";
 import { List } from "../utils/list";
 import { PlacesAPI } from "../places-apis/places-api";
+import { WeatherData } from "./weather-data";
 
 export class WorldWeatherController {
 	constructor( placesAPI: PlacesAPI ) {
@@ -27,7 +28,9 @@ export class WorldWeatherController {
 		return this._selectedCitiesList.items;
 	}
 
-	addCity( city: City ) {
+	async addCity( city: City ) {
+		city = await WeatherData.get( city );
+		city = await WeatherData.getHourly( city );
 		this._selectedCitiesList.push( city );
 		this.notifyChange();
 	}
