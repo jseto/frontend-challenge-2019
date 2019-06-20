@@ -3,7 +3,7 @@ export interface Coordinates {
 	longitude: number;
 }
 
-interface WeatherData {
+export interface WeatherState {
 	temp: {
 		current: number;
 		min: number;
@@ -59,7 +59,7 @@ export class City {
 		return this._location;
 	}
 
-	setWeatherData( data: WeatherData ) {
+	setWeatherData( data: WeatherState ) {
 		this._weatherData = {...data};
 		return this;
 	}
@@ -68,7 +68,7 @@ export class City {
 		return this._weatherData;
 	}
 
-	setHourlyWeatherData( data: WeatherData[] ) {
+	setHourlyWeatherData( data: WeatherState[] ) {
 		this._hourlyWeatherData = [...data];
 		return this;
 	}
@@ -95,6 +95,6 @@ export class City {
 	private _name: string;
 	private _placeName: string;
 	private _location: Coordinates;
-	private _weatherData: WeatherData;
-	private _hourlyWeatherData: WeatherData[];
+	private _weatherData: WeatherState;
+	private _hourlyWeatherData: WeatherState[];
 }

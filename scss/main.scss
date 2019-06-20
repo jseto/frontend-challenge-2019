@@ -198,6 +198,26 @@
 }
 
 //------------------------------------------------------------
+// FlexBox
+//------------------------------------------------------------
+.world-weather .flex-box {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.world-weather .vertical-flex {
+	flex-direction: column;
+	text-align: center;
+}
+
+.world-weather .hourly-data {
+	width: 50px;
+	// margin: 10px;
+	text-align: center;
+}
+
+//------------------------------------------------------------
 // Button related classes
 //------------------------------------------------------------
 
@@ -218,69 +238,62 @@
 	@extend %button-base;
 }
 
-.world-weather .wish-widget {
-	@extend %button-base;
-	text-align: center;
-  display: inline-block;
-}
-
-//------------------------------------------------------------
-// ItemPicker
-//------------------------------------------------------------
-.world-weather .item-picker .add-button {
-	margin: 0 0 0.5em 0.5em;
-}
-
-//------------------------------------------------------------
-// PickerPanel
-//------------------------------------------------------------
-
-// .world-weather .picker-master-view {
-// 	background-color: lightgray;
-// }
-
-.world-weather .picker-panel {
-	// list-style-type: none;
-	margin-left: 1em;
+.search-box-panel {
+	// margin-left: 1em;
 	margin-top: 0;
 	position: absolute;
 	color: gray;
 	border-width: 1px;
-	max-height: 10em;
+	max-height: 11em;
 	overflow: auto;
 	background-color: white;
 	padding: 0.8em;
-	width: 60%;
+	// width: 60%;
 	z-index: 1;
 	@extend %panel-border;
 }
 
-.world-weather .picker-panel li {
-	margin: 0.5em;
+.world-weather .search-box-panel li {
+	margin: 0.2em 0.2em 0.2em 0.8em;
 }
 
-.world-weather .picker-panel li:hover {
+.world-weather .search-box-panel li:hover {
 	background-color: #f1f1f1
+}
+
+.weather-details {
+	padding: 1em;
+}
+
+.header-city-name {
+	flex-grow: 8;
+	align-self: center;
+	// padding-left: 1em;
+}
+
+.header-data {
+	align-self: center;
+	flex-grow: 1;
 }
 
 //------------------------------------------------------------
 // Trip planner
 //------------------------------------------------------------
-
-.world-weather .trip-panel {
-	// padding: 0.5em;
- 	background-color: #00000005;
-	@extend %panel-border;
-	// background-color: white;
-	// margin: 1em;
-	min-height: 10em;
-}
-
-.world-weather .trip-panel-heading {
-	padding: 1em;
-	padding-top: 0;
-}
-
+//
+// .world-weather .trip-panel {
+// 	// padding: 0.5em;
+//  	background-color: #00000005;
+// 	@extend %panel-border;
+// 	// background-color: white;
+// 	// margin: 1em;
+// 	min-height: 10em;
+// }
+//
+// .world-weather .trip-panel-heading {
+// 	padding: 1em;
+// 	padding-top: 0;
+// }
+//
 //------------------------------------------------------------
 // Detail Panel related classes
 //------------------------------------------------------------
@@ -310,23 +323,23 @@
 // 	padding: 0 0.5em 0.5em 0.5em;
 // }
 
-.world-weather .detail-content .country-panel {
+.world-weather .detail-content {
 	// background-color: #f9eded
 	background: linear-gradient(to bottom, #f9eded, #d7bebe);
 }
-
-.world-weather .detail-content .city-panel {
-	background-color: #ecf7f9
-}
-
-.world-weather .detail-content .activity-panel {
-	background-color: #f9f7ec
-}
+//
+// .world-weather .detail-content .city-panel {
+// 	background-color: #ecf7f9
+// }
+//
+// .world-weather .detail-content .activity-panel {
+// 	background-color: #f9f7ec
+// }
 
 .world-weather .detail-view {
 	@extend %panel-border;
 	background-color: white;
-	margin: 0.6em;
+	// margin: 0.6em;
 }
 
 .world-weather .detail-icon-panel {

@@ -9,9 +9,12 @@ describe('WorldWeather', ()=>{
 	let wrapper: ReactWrapper;
 	let controller: WorldWeatherController;
 	let mockFindCity: jasmine.Spy;
+	const weatherURL = 'begin:https://api.openweathermap.org/data/2.5/weather';
+	const forecastURL = 'begin:https://api.openweathermap.org/data/2.5/forecast'
 
 	beforeEach(()=>{
-		fetchMock.mock( '*', () => mockeWeatherData )
+		fetchMock.mock( weatherURL, mockeWeatherData.weather );
+		fetchMock.mock( forecastURL, mockeWeatherData.forecast );
 		controller = new WorldWeatherController( new MockPlacesAPI() );
 		mockFindCity = spyOn( controller, 'findCity' ).and.callThrough();
 		wrapper = mount(
@@ -41,6 +44,8 @@ describe('WorldWeather', ()=>{
 			wrapper = wrapper.update();
 			wrapper.find( '.search-box-panel li' ).at(0).simulate('click');
 			await fetchMock.flush(true);
+			await fetchMock.flush(true);
+			await fetchMock.flush(true);
 			wrapper = wrapper.update();
 
 			expect( wrapper.find('.master-view li').at(0) ).toIncludeText( 'Bandung' );
@@ -56,6 +61,8 @@ describe('WorldWeather', ()=>{
 			wrapper = wrapper.update();
 			wrapper.find( '.search-box-panel li' ).at(0).simulate('click');
 			await fetchMock.flush(true);
+			await fetchMock.flush(true);
+			await fetchMock.flush(true);
 			wrapper = wrapper.update();
 
 			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '17º' /*Average temperature*/ );
@@ -67,7 +74,7 @@ describe('WorldWeather', ()=>{
 			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '89%' /*Humidity*/ );
 			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '1013 hPa' /*Pressure*/ );
 			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '3 mm' /*Rain volume*/ );
-			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '--' /*Showing 24 hours forecast*/ );
+			expect( wrapper.find('.city-view-detail').find( '.hourly-data' ).at(0) ).toExist( /*Showing 24 hours forecast*/ );
 		})
 	})
 })

@@ -21,6 +21,7 @@ export class WorldWeather extends Component<WorldWeatherProps> {
 
     return (
 			<div className="world-weather">
+
 				<SearchBox
 					onSelect={ ( item: ViewListItem<City> ) => controller.addCity( item.object ) }
 					onInput={ value => controller.findCity( value ) }
@@ -31,6 +32,8 @@ export class WorldWeather extends Component<WorldWeatherProps> {
 					})) }
 				>
 				</SearchBox>
+
+
 
 				<MasterView
 					listSource={ controller.selectedCities.map(

@@ -29,8 +29,9 @@ export class WorldWeatherController {
 	}
 
 	async addCity( city: City ) {
-		city = await WeatherData.get( city );
-		city = await WeatherData.getHourly( city );
+		city = await WorldWeatherController.refreshWeatherData( city )
+		// city = await WeatherData.get( city );
+		// city = await WeatherData.getHourly( city );
 		this._selectedCitiesList.push( city );
 		this.notifyChange();
 	}
@@ -53,6 +54,13 @@ export class WorldWeatherController {
 
 	private notifyChange() {
 		if ( this._onChange ) this._onChange();
+	}
+
+	static async refreshWeatherData( city: City ) {
+		city = await WeatherData.get( city );
+		city = await WeatherData.getHourly( city );
+
+		return city;
 	}
 
 	private _selectedCitiesList: List<City>;
