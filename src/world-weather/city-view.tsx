@@ -1,20 +1,15 @@
-import { h, Component } from "preact";
+import { h } from "preact";
 import { City, WeatherState } from "./city";
 import { UnitConverter } from "../utils/unit-converter";
+import { AnimatedPanel, AnimatedPanelProps } from "../utils/frontend/animated-panel";
 
-export interface CityViewProps {
+export interface CityViewProps extends AnimatedPanelProps {
 	city: City;
-	active?: boolean;
 	activatePanel?: () => void;
-	queryUpdateContentHeight?: ()=>void;
 	units: 'imperial' | 'international';
 }
 
-export interface ControllerPanelState {
-	scrollHeight: number;
-}
-
-export class CityView extends Component<CityViewProps, ControllerPanelState> {
+export class CityView extends AnimatedPanel<CityViewProps> {
 	render() {
 		const city = this.props.city;
 		const tempSym = UnitConverter.getMeasureUnit( 'temperature', this.props.units === 'imperial' );
@@ -85,28 +80,5 @@ export class CityView extends Component<CityViewProps, ControllerPanelState> {
 			</div>
 		);
 	}
-
-	componentDidUpdate() {
-		this.updateContentPanelHeight();
-		// Delayed execution to wait for css animation
-		setTimeout( ()=>this.props.queryUpdateContentHeight && this.props.queryUpdateContentHeight(), 300 );
-	}
-
-	private getAccordionPanelHeight() {
-		return this.props.active? this.state.scrollHeight + 'px' : null;
-	}
-
-	updateContentPanelHeight() {
-		const newHeight = this.getContentPanelHeight() + 900; //900 is an arbritary number near to the height of screen so it repaints the entire screen. Afeter that, on delayed update parent it will set the proper height
-		if ( newHeight !== this.state.scrollHeight ) {
-			this.setState({ scrollHeight: newHeight })
-		}
-	}
-
-	private getContentPanelHeight(): number {
-		const panelContent = this.base.getElementsByClassName('panel-content');
-		return panelContent.length && panelContent.item(0).scrollHeight;
-	};
-
 
 }
