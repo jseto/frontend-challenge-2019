@@ -37,7 +37,6 @@ export class CityView extends AnimatedPanel<CityViewProps> {
 
 	private renderContent() {
 		const weather = UnitConverter.getConvertedMeasures( this.props.city.weatherData, this.props.units === 'imperial' );
-		// const city = this.props.city;
 		const tempSym = UnitConverter.getMeasureUnit( 'temperature', this.props.units === 'imperial' );
 		const windSym = UnitConverter.getMeasureUnit( 'speed', this.props.units === 'imperial' );
 		const presSym = UnitConverter.getMeasureUnit( 'pressure', this.props.units === 'imperial' );

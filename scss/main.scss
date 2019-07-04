@@ -26,12 +26,6 @@
 	margin: 0.5em;
 }
 
-.world-weather .input-big input {
-	font-size: 1.3em !important;
-	font-weight: bold;
-	width: 100%;
-}
-
 %border-bottom {
 	border: none;
 	border-bottom: 1px solid;
@@ -45,11 +39,14 @@
 .world-weather input {
 	@extend %font;
 	@extend %panel-border;
+	padding: 0.4em;
+	font-size: 1.3em;
 	outline: none;
 	color: #3137ba;
 	background-color: transparent;
 	margin-bottom: 0.5em;
 	width: 90%;
+	border-radius: 4px;
 }
 
 .world-weather ::placeholder{
