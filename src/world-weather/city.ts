@@ -19,8 +19,6 @@ export interface WeatherState {
 	time: Date;
 }
 
-type Measure = 'speed' | 'temperature' | 'pressure' | 'length';
-
 export class City {
 
 	setCode( code: string ) {
@@ -75,20 +73,6 @@ export class City {
 
 	get hourlyWeatherData() {
 		return this._hourlyWeatherData;
-	}
-
-	localeTemp( temp?: number ) {
-		const t = temp? temp : this.weatherData.temp.current;
-		return Math.round( t - 272.15 );
-	}
-
-	getMeasureUnit( measure: Measure ) {
-		switch ( measure ) {
-			case 'speed': return 'm/s';
-			case 'temperature': return 'ºC';
-			case 'pressure': return 'hPa';
-			case 'length': return 'mm';
-		}
 	}
 
 	private _code: string;

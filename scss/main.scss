@@ -52,11 +52,6 @@
 	width: 90%;
 }
 
-.world-weather .stay-length input {
-	// width: 1.4em;
-	width: 2.5em;
-}
-
 .world-weather ::placeholder{
 	color: #3137ba40;
 }
@@ -206,9 +201,19 @@
 	justify-content: center;
 }
 
+.world-weather .flex-box-left {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
+}
+
 .world-weather .vertical-flex {
 	flex-direction: column;
 	text-align: center;
+}
+
+.world-weather .flex-vertical-center {
+	align-self: center;
 }
 
 .world-weather .hourly-data {
@@ -238,7 +243,12 @@
 	@extend %button-base;
 }
 
-.search-box-panel {
+.world-weather .search-box {
+	flex-grow: 8;
+	align-self: center;
+}
+
+.world-weather .search-box-panel {
 	// margin-left: 1em;
 	margin-top: 0;
 	position: absolute;
@@ -261,48 +271,24 @@
 	background-color: #f1f1f1
 }
 
-.weather-details {
+.world-weather .weather-details {
 	padding: 1em;
 }
 
-.header-city-name {
+.world-weather .header-city-name {
 	flex-grow: 8;
 	align-self: center;
 	// padding-left: 1em;
 }
 
-.header-data {
+.world-weather .header-data {
 	align-self: center;
 	flex-grow: 1;
 }
 
 //------------------------------------------------------------
-// Trip planner
-//------------------------------------------------------------
-//
-// .world-weather .trip-panel {
-// 	// padding: 0.5em;
-//  	background-color: #00000005;
-// 	@extend %panel-border;
-// 	// background-color: white;
-// 	// margin: 1em;
-// 	min-height: 10em;
-// }
-//
-// .world-weather .trip-panel-heading {
-// 	padding: 1em;
-// 	padding-top: 0;
-// }
-//
-//------------------------------------------------------------
 // Detail Panel related classes
 //------------------------------------------------------------
-
-// .world-weather .master-view {
-// 	border-width: 1px;
-// 	border-style: solid;
-// 	border-color: lightgray;
-// }
 
 .world-weather .panel-content {
 	display: inherit;
@@ -327,14 +313,6 @@
 	// background-color: #f9eded
 	background: linear-gradient(to bottom, #f9eded, #d7bebe);
 }
-//
-// .world-weather .detail-content .city-panel {
-// 	background-color: #ecf7f9
-// }
-//
-// .world-weather .detail-content .activity-panel {
-// 	background-color: #f9f7ec
-// }
 
 .world-weather .detail-view {
 	@extend %panel-border;
@@ -377,81 +355,6 @@
 	right: 0.4em;
 	bottom: 0.3em;
 }
-
-//------------------------------------------------------------
-// Tooltip related classes
-//------------------------------------------------------------
-
-$tooltipBGColor: #dadada;
-
-/* Tooltip container */
-.world-weather .tooltip {
-  position: relative;
-}
-
-/* Tooltip text */
-.world-weather .tooltip .tooltiptext {
-  background-color: $tooltipBGColor;
-  border-radius: 4px;
-	margin: 1em;
-  position: absolute;
-  z-index: 5;
-	font-size: 0.8em;
-	padding: 1em;
-}
-
-.world-weather .popup .tooltiptext {
-	visibility: hidden;
-	color: black;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.world-weather .popup:hover .tooltiptext {
-  visibility: visible;
-}
-
-/*arrow*/
-.world-weather .bottom-tooltip::after {
-  content: " ";
-  position: absolute;
-  bottom: 100%; /* At the bottom of the tooltip */
-  left: 1.5em;
-  border-width: 5px;
-  border-style: solid;
-	border-color: transparent transparent $tooltipBGColor transparent;;
-}
-
-.world-weather .top-tooltip::after {
-  content: " ";
-  position: absolute;
-  top: 100%; /* At the bottom of the tooltip */
-  left: 1.5em;
-  border-width: 5px;
-  border-style: solid;
-  border-color: $tooltipBGColor transparent transparent transparent;
-}
-
-.world-weather .tooltip .bottom-tooltip  {
-  top: 90%;
-  left: -1em;
-}
-
-.world-weather .tooltip .top-tooltip {
-  // width: auto;
-	// min-width: 8em;
-  bottom: 90%;
-  left: 0;
-  // margin-left: -5em; /* Use half of the width (120/2 = 60), to center the tooltip */
-}
-
-//------------------------------------------------------------
-// Tooltip related classes
-//------------------------------------------------------------
-
-
-// .world-weather .accordion-header {
-//   cursor: pointer;
-// }
 
 .world-weather .accordion-panel {
   max-height: 0;

@@ -52,6 +52,17 @@ export class WorldWeatherController {
 		return this;
 	}
 
+
+	set imperialUnits( imperial: boolean ) {
+		this._imperialUnits = imperial;
+	}
+
+	get imperialUnits() {
+		return this._imperialUnits;
+	}
+
+
+
 	private notifyChange() {
 		if ( this._onChange ) this._onChange();
 	}
@@ -67,4 +78,5 @@ export class WorldWeatherController {
 	private _placesAPI: PlacesAPI;
 	private _foundCities: City[];
 	private _onChange: ()=>void;
+	private _imperialUnits: boolean;
 }

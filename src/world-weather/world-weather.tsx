@@ -22,18 +22,28 @@ export class WorldWeather extends Component<WorldWeatherProps> {
     return (
 			<div className="world-weather">
 
-				<SearchBox
-					onSelect={ ( item: ViewListItem<City> ) => controller.addCity( item.object ) }
-					onInput={ value => controller.findCity( value ) }
-					items={ controller.foundCities.map( city => ({
-						key: city.name,
-						label: city.placeName,
-						object: city
-					})) }
-				>
-				</SearchBox>
-
-
+				<div className="flex-box-left vertical-margin-half">
+					<SearchBox
+						onSelect={ ( item: ViewListItem<City> ) => controller.addCity( item.object ) }
+						onInput={ value => controller.findCity( value ) }
+						items={ controller.foundCities.map( city => ({
+							key: city.name,
+							label: city.placeName,
+							object: city
+						})) }
+					>
+					</SearchBox>
+					<button
+						className="units-button flex-vertical-center align-center"
+						onClick={ () => {
+							controller.imperialUnits = !controller.imperialUnits;
+							this.setState({});
+							console.log( controller.imperialUnits )
+						} }
+					>
+						<p>Units</p><p>{ controller.imperialUnits? 'ºF' : 'ºC' }</p>
+					</button>
+				</div>
 
 				<MasterView
 					listSource={ controller.selectedCities.map(
@@ -50,6 +60,7 @@ export class WorldWeather extends Component<WorldWeatherProps> {
 									city={city}
 									active={active}
 									activatePanel={activateClick}
+									units={ controller.imperialUnits? 'imperial' : 'international' }
 								>
 								</CityView>
 							);

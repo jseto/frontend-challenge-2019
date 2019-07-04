@@ -52,8 +52,20 @@ describe('WorldWeather', ()=>{
 			expect( wrapper.find('.master-view li').at(0) ).toIncludeText( '17º' );
 		})
 
-		xit( 'should let config the temperature unit system e.g. Kelvin, Fahrenheit, Celsius', ()=>{
+		it( 'should let config the temperature unit system e.g. Kelvin, Fahrenheit, Celsius', async ()=>{
+			await controller.findCity('ba')
+			wrapper = wrapper.update();
+			wrapper.find( '.search-box-panel li' ).at(0).simulate('click');
+			await fetchMock.flush(true);
+			await fetchMock.flush(true);
+			await fetchMock.flush(true);
+			wrapper = wrapper.update();
 
+			wrapper.find('.units-button').simulate('click');
+			wrapper = wrapper.update();
+
+			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '59ºF' );
+			expect( wrapper.find('.city-view-detail').at(0) ).toIncludeText( '16.35 mph' /*Wind speed*/ );
 		})
 
 		it( 'should show datailed Weather info', async ()=>{

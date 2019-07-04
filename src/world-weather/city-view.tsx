@@ -1,11 +1,13 @@
 import { h, Component } from "preact";
 import { City, WeatherState } from "./city";
+import { UnitConverter } from "../utils/unit-converter";
 
 export interface CityViewProps {
 	city: City;
 	active?: boolean;
 	activatePanel?: () => void;
 	queryUpdateContentHeight?: ()=>void;
+	units: 'imperial' | 'international';
 }
 
 export interface ControllerPanelState {
@@ -15,7 +17,8 @@ export interface ControllerPanelState {
 export class CityView extends Component<CityViewProps, ControllerPanelState> {
 	render() {
 		const city = this.props.city;
-		const tempSym = city.getMeasureUnit( 'temperature' );
+		const tempSym = UnitConverter.getMeasureUnit( 'temperature', this.props.units === 'imperial' );
+		const weather = UnitConverter.getConvertedMeasures( this.props.city.weatherData, this.props.units === 'imperial' );
 
 		return (
 			<div className="city-view">
@@ -27,7 +30,7 @@ export class CityView extends Component<CityViewProps, ControllerPanelState> {
 						<img src={`http://openweathermap.org/img/w/${city.weatherData.icon}.png`}></img>
 					</div>
 					<div className="header-data dim-color">
-						<h3>{city.localeTemp()}{tempSym}</h3>
+						<h3>{ weather.temp.current }{tempSym}</h3>
 					</div>
 				</div>
 				<div className="panel-content accordion-panel" style={ { maxHeight: this.getAccordionPanelHeight() } }>
@@ -38,31 +41,32 @@ export class CityView extends Component<CityViewProps, ControllerPanelState> {
 	}
 
 	private renderContent() {
-		const city = this.props.city;
-		const tempSym = city.getMeasureUnit( 'temperature' );
-		const windSym = city.getMeasureUnit( 'speed' );
-		const presSym = city.getMeasureUnit( 'pressure' );
-		const rainSym = city.getMeasureUnit( 'length' );
+		const weather = UnitConverter.getConvertedMeasures( this.props.city.weatherData, this.props.units === 'imperial' );
+		// const city = this.props.city;
+		const tempSym = UnitConverter.getMeasureUnit( 'temperature', this.props.units === 'imperial' );
+		const windSym = UnitConverter.getMeasureUnit( 'speed', this.props.units === 'imperial' );
+		const presSym = UnitConverter.getMeasureUnit( 'pressure', this.props.units === 'imperial' );
+		const rainSym = UnitConverter.getMeasureUnit( 'length', this.props.units === 'imperial' );
 
 		return (
 			<div className="city-view-detail flex-box">
 				<div style="flex-grow: 1"></div>
 				<div style="flex-grow: 1">
 					<div className="flex-box vertical-flex">
-						<p>Min: {city.localeTemp( city.weatherData.temp.min )}{tempSym} Max: {city.localeTemp( city.weatherData.temp.max )}{tempSym}</p>
-						<h1>{city.localeTemp()}{tempSym}</h1>
-						<img src={`http://openweathermap.org/img/w/${city.weatherData.icon}.png`} width="50px"></img>
-						<h3>{city.weatherData.weather}</h3>
-						<p>{city.weatherData.description}</p>
+						<p>Min: { weather.temp.min }{tempSym} Max: { weather.temp.max }{tempSym}</p>
+						<h1>{ weather.temp.current }{tempSym}</h1>
+						<img src={`http://openweathermap.org/img/w/${ weather.icon }.png`} width="50px"></img>
+						<h3>{ weather.weather }</h3>
+						<p>{ weather.description }</p>
 					</div>
 					<div className="weather-details">
-						<p>Wind: {city.weatherData.wind} {windSym}</p>
-						<p>Pressure: {city.weatherData.pressure} {presSym}</p>
-						<p>Humidity: {city.weatherData.humidity}%</p>
-						<p>Rain: {city.weatherData.rain} {rainSym}</p>
+						<p>Wind: { weather.wind } {windSym}</p>
+						<p>Pressure: { weather.pressure } {presSym}</p>
+						<p>Humidity: { weather.humidity }%</p>
+						<p>Rain: { weather.rain } {rainSym}</p>
 					</div>
 					<div className="flex-box">
-						{ city.hourlyWeatherData.slice( 0, 8 ).map( item => this.renderHourlyData( item ) ) }
+						{ this.props.city.hourlyWeatherData.slice( 0, 8 ).map( item => this.renderHourlyData( item ) ) }
 					</div>
 				</div>
 				<div style="flex-grow: 1"></div>
@@ -71,13 +75,13 @@ export class CityView extends Component<CityViewProps, ControllerPanelState> {
 	}
 
 	private renderHourlyData( data: WeatherState ):JSX.Element {
-		const city = this.props.city;
+		const weather = UnitConverter.getConvertedMeasures( data, this.props.units === 'imperial' );
 
 		return (
 			<div className="hourly-data">
 				<p>{data.time.getHours()}:00</p>
 				<img src={`http://openweathermap.org/img/w/${data.icon}.png`}></img>
-				<p>{city.localeTemp( data.temp.current )}{city.getMeasureUnit('temperature')}</p>
+				<p>{ weather.temp.current }{ UnitConverter.getMeasureUnit('temperature', this.props.units === 'imperial') }</p>
 			</div>
 		);
 	}
