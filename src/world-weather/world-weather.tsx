@@ -15,66 +15,78 @@ export class WorldWeather extends Component<WorldWeatherProps> {
 		props.controller.setOnChange( ()=> this.setState({}) );
 	}
 
-  render() {
-
-		const controller = this.props.controller;
-
+	render() {
     return (
 			<div className="world-weather">
 				<div className="flex-box">
 					<div style="flex-grow:1;"></div>
 					<div style="flex-grow:1;">
-						<div className="flex-box vertical-margin-half">
-							<SearchBox
-								onSelect={ ( item: ViewListItem<City> ) => controller.addCity( item.object ) }
-								onInput={ value => controller.findCity( value ) }
-								items={ controller.foundCities.map( city => ({
-									key: city.name,
-									label: city.placeName,
-									object: city
-								})) }
-							>
-							</SearchBox>
-							<button
-								className="units-button flex-vertical-center align-center"
-								onClick={ () => {
-									controller.imperialUnits = !controller.imperialUnits;
-									this.setState({});
-									console.log( controller.imperialUnits )
-								} }
-							>
-								<p>Units</p><p>{ controller.imperialUnits? 'ºF' : 'ºC' }</p>
-							</button>
-						</div>
-
-						<MasterView
-							listSource={ controller.selectedCities.map(
-								city => ({ key: city.name, label: city.name, object: city })
-							)}
-							onDelete={ item => controller.deleteCity( item.object ) }
-							onMoveUp={ item => this.move( item, -1 ) }
-							onMoveDown={ item => this.move( item, 1 ) }
-							>
-							{
-								( city: City, active: boolean, activateClick: () => void ) => {
-									return (
-										<CityView
-											city={city}
-											active={active}
-											activatePanel={activateClick}
-											units={ controller.imperialUnits? 'imperial' : 'international' }
-										>
-										</CityView>
-									);
-								}
-							}
-						</MasterView>
+						{ this.renderSearchBox() }
+						{ this.renderMasterView() }
 					</div>
 					<div style="flex-grow:1;"></div>
 				</div>
 			</div>
 		);
   }
+
+	private renderMasterView() {
+		const controller = this.props.controller;
+
+		return (
+			<MasterView
+				listSource={ controller.selectedCities.map(
+					city => ({ key: city.name, label: city.name, object: city })
+				)}
+				onDelete={ item => controller.deleteCity( item.object ) }
+				onMoveUp={ item => this.move( item, -1 ) }
+				onMoveDown={ item => this.move( item, 1 ) }
+				>
+				{
+					( city: City, active: boolean, activateClick: () => void ) => {
+						return (
+							<CityView
+								city={city}
+								active={active}
+								activatePanel={activateClick}
+								units={ controller.imperialUnits? 'imperial' : 'international' }
+							>
+							</CityView>
+						);
+					}
+				}
+			</MasterView>
+		)
+	}
+
+	private renderSearchBox() {
+		const controller = this.props.controller;
+
+		return(
+			<div className="flex-box vertical-margin-half">
+				<SearchBox
+					onSelect={ ( item: ViewListItem<City> ) => controller.addCity( item.object ) }
+					onInput={ value => controller.findCity( value ) }
+					items={ controller.foundCities.map( city => ({
+						key: city.name,
+						label: city.placeName,
+						object: city
+					})) }
+				>
+				</SearchBox>
+				<button
+					className="units-button flex-vertical-center align-center"
+					onClick={ () => {
+						controller.imperialUnits = !controller.imperialUnits;
+						this.setState({});
+						console.log( controller.imperialUnits )
+					} }
+				>
+					<p>Units</p><p>{ controller.imperialUnits? 'ºF' : 'ºC' }</p>
+				</button>
+			</div>
+		)
+	}
 
 	move( item: ViewListItem<City>, distance: number ): ViewListItem<City> {
 		const replacedCity = this.props.controller.moveCity( item.object, distance )
