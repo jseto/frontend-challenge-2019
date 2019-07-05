@@ -20,6 +20,15 @@ export interface MasterViewProps<T> extends ComponentProps {
 	onMoveDown: ( item: ViewListItem<T> ) => ViewListItem<T>;
 }
 
+/**
+ * Master Detail View Master manager
+ * Manages add, delete and move operations of contained detail view
+ * @param props listSource the items associated to each detail View
+ * 							onDelete callback called when a item is deleted
+ * 							onMoveUp callback called when item is moved up
+ * 							onMoveUp callback called when item is moved up
+ */
+
 export class MasterView< T > extends Component< MasterViewProps<T>, MasterViewState >{
 	constructor( props: MasterViewProps<T> ) {
 		super( props );

@@ -5,7 +5,7 @@ let AngleUp = require( "@fortawesome/fontawesome-free/svgs/solid/angle-up.svg" )
 let AngleDown = require( "@fortawesome/fontawesome-free/svgs/solid/angle-down.svg" );
 
 interface DetailViewProps<T> {
-	children: ComponentChildren;
+	children?: ComponentChildren;
 	item: ViewListItem<T>;
 	queryActivate: ( key: string ) => void;
 	active: boolean;
@@ -19,6 +19,18 @@ interface DetailViewProps<T> {
 interface DetailViewState {
 }
 
+/**
+ * Manages the detail view of a Master-Detail-View
+ * @params props 	children the children component to render as a detail View
+ * 								item data asociated with this detail View
+ * 								queryActivate callback called when the user interacted to activate this View
+ * 								active indicates if this view is active
+ * 								onDelete callback called when a item is deleted
+ * 								onMoveUp callback called when item is moved up
+ * 								onMoveDown callback called when item is moved up
+ * 								haveToShowUp should return true if this view have to show up arrow. If it is the first view it should return false
+ * 								haveToShowDown should return true if this view have to show down arrow. If it is the last view it should return false
+ */
 export class DetailView<T> extends Component< DetailViewProps<T>, DetailViewState > {
 
 	render () {

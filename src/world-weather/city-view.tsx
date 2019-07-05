@@ -1,7 +1,7 @@
 import { h } from "preact";
 import { City, WeatherState } from "./city";
 import { UnitConverter } from "../utils/unit-converter";
-import { AnimatedPanel, AnimatedPanelProps } from "../utils/frontend/animated-panel";
+import { AnimatedPanel, AnimatedPanelProps } from "../utils/frontend/master-detail-view/animated-panel";
 
 export interface CityViewProps extends AnimatedPanelProps {
 	city: City;
@@ -28,7 +28,7 @@ export class CityView extends AnimatedPanel<CityViewProps> {
 						<h3>{ weather.temp.current }{tempSym}</h3>
 					</div>
 				</div>
-				<div className="panel-content accordion-panel" style={ { maxHeight: this.getAccordionPanelHeight() } }>
+				<div className="panel-content accordion-panel" style={ { maxHeight: this.getAnimatedPanelHeight() } }>
 					{ this.renderContent() }
 				</div>
 			</div>
