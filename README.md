@@ -1,10 +1,20 @@
 # LivingOS: Frontend challenge
 
+## Comments from applicant
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/462ccecfc048c7bb9232/maintainability)](https://codeclimate.com/github/jseto/frontend-challenge-2019/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/462ccecfc048c7bb9232/test_coverage)](https://codeclimate.com/github/jseto/frontend-challenge-2019/test_coverage)
+
+
+
+# Original ReadMe
+
 Hi, all applicants if you are interested in this job. We would like to test your coding skills.
 
 If you can implement our assignment, regardless of your qualifications or how many years of experience you have, we will contact you for the next steps of the interview process.
 
-We'd like you to develop a web application for weather, which can show the current weather from anywhere in the world. 
+We'd like you to develop a web application for weather, which can show the current weather from anywhere in the world.
 
 ## Design Guideline
 This is just a guideline. You can adjust or totally redesign it.

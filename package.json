@@ -2,7 +2,8 @@
   "scripts": {
     "develop": "webpack-dev-server",
     "test": "jest",
-    "debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage false"
+    "debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage false",
+		"build": "webpack --mode=production"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
