@@ -1,4 +1,4 @@
-import { City } from "./city";
+import { City, WeatherState } from "./city";
 
 export class WeatherData {
 	static apiKey = '04b1ffd8fc46ad9be74016c1ad44f636';
@@ -9,7 +9,20 @@ export class WeatherData {
 		const resp = await fetch( `https://api.openweathermap.org/data/2.5/weather?APPID=${WeatherData.apiKey}&lat=${lat}&lon=${lon}` );
 		const data: RespWeatherData = await resp.json();
 
-		return city.setWeatherData({
+		return city.setWeatherData( this.fillFields( data ) );
+	}
+
+	static async getHourly( city: City, location?: Coordinates ) {
+		const lat = location? location.latitude : city.location.latitude;
+		const lon = location? location.longitude : city.location.longitude;
+		const resp = await fetch( `https://api.openweathermap.org/data/2.5/forecast?APPID=${WeatherData.apiKey}&lat=${lat}&lon=${lon}` );
+		const data: HourlyWeatherData = await resp.json();
+
+		return city.setHourlyWeatherData( data.list.map( (item: ListData) => this.fillFields( item ) ) );
+	}
+
+	static fillFields( data: RespWeatherData | ListData ): WeatherState {
+		return {
 			time: new Date(data.dt*1000),
 			temp: {
 				current: data.main.temp,
@@ -23,32 +36,7 @@ export class WeatherData {
 			icon: data.weather[0].icon,
 			weather: data.weather[0].main,
 			description: data.weather[0].description
-		});
-	}
-
-	static async getHourly( city: City, location?: Coordinates ) {
-		const lat = location? location.latitude : city.location.latitude;
-		const lon = location? location.longitude : city.location.longitude;
-		const resp = await fetch( `https://api.openweathermap.org/data/2.5/forecast?APPID=${WeatherData.apiKey}&lat=${lat}&lon=${lon}` );
-		const data: HourlyWeatherData = await resp.json();
-
-		return city.setHourlyWeatherData( data.list.map( (item: ListData) =>{
-			return {
-				time: new Date( item.dt * 1000 ),
-				temp: {
-					current: item.main.temp,
-					min: item.main.temp_min,
-					max: item.main.temp_max
-				},
-				pressure: item.main.pressure,
-				humidity: item.main.humidity,
-				rain: item.rain? item.rain['1h'] : 0,
-				wind: item.wind.speed,
-				icon: item.weather[0].icon,
-				weather: item.weather[0].main,
-				description: item.weather[0].description
-			}
-		}));
+		}
 	}
 }
 
