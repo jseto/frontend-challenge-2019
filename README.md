@@ -3,10 +3,26 @@
 ## Comments from applicant
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/462ccecfc048c7bb9232/maintainability)](https://codeclimate.com/github/jseto/frontend-challenge-2019/maintainability)
-
 [![Test Coverage](https://api.codeclimate.com/v1/badges/462ccecfc048c7bb9232/test_coverage)](https://codeclimate.com/github/jseto/frontend-challenge-2019/test_coverage)
+[![](https://img.shields.io/badge/deploy-last%20version-green.svg)](https://jseto.github.io/frontend-challenge-2019/)
+[![Build Status](https://travis-ci.org/jseto/frontend-challenge-2019.svg?branch=master)](https://travis-ci.org/jseto/frontend-challenge-2019)
 
 
+The quality of this project is being monitored with CodeClimate. You can access the project metrics by clicking on the badges above.
+
+The choosed framework is Preact. Preact is a isomorphic library to React but with a smaller footprint of about 3Kb. I choosed to use it because I think to build a widget you don't want to fill your whole application with an extra 100Kb of React. Everything in Preact is on React, so you can easily move to React in case you need.
+
+The widget is divided in a view layer and a controller. Controller holds all the business logic of the application. Therefore, if you want to change the view layer, lets say want to use Vue, you can do and still use the old logic with the non coupled tests for the controller.
+
+This introduces a bit of overhead in the widget but, being this and aptitude test, I thought it was better to show off a litle bit.
+
+The view layer is composed by a reusable couple of components; MasterView-DetailView.
+
+DetailView can show any html code passed as children so you can easily customize the detail view presentation without touching DetailView component.
+
+The project implements CI with Travis. Travis checks that tests are passed smoothly and if so, the widget is deployed to github pages in the gh-pages branch. You can check the live widget [here](https://jseto.github.io/frontend-challenge-2019/)
+
+Thanks for your attention
 
 # Original ReadMe
 
